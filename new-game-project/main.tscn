@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://cqow47bch5ocs"]
+
+[ext_resource type="Script" uid="uid://dgemna2cprj7k" path="res://player.gd" id="1_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://dfkgcn25jim8y" path="res://images (2).jpg" id="1_7mycd"]
+[ext_resource type="Texture2D" uid="uid://8ytctj1etdgg" path="res://Basket_PNG_Clipart.png" id="1_lquwl"]
+[ext_resource type="Texture2D" uid="uid://d36a6sy1p171t" path="res://images.jpg" id="2_h2yge"]
+[ext_resource type="Texture2D" uid="uid://oa7wupgeffk7" path="res://images (1).jpg" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://6xipnr5xjedb" path="res://leaf.tscn" id="4_1bvp3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_58xug"]
+radius = 168.12198
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m6xoa"]
+
+[node name="Node2D" type="Node2D" unique_id=1074152125]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1985216100]
+position = Vector2(597, 364)
+scale = Vector2(1.6201282, 1.7372799)
+texture = ExtResource("1_7mycd")
+
+[node name="Basket" type="Area2D" parent="." unique_id=141767563 groups=["basket"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="Basket" unique_id=1376702695]
+position = Vector2(544, 465)
+scale = Vector2(0.02759773, 0.02795028)
+texture = ExtResource("1_lquwl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Basket" unique_id=1162009952]
+position = Vector2(547, 492)
+scale = Vector2(0.91247123, 0.91247123)
+shape = SubResource("CircleShape2D_58xug")
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1049476345]
+position = Vector2(136, 284)
+scale = Vector2(0.5050784, 0.4992587)
+script = ExtResource("1_0xm2m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=612472216]
+position = Vector2(302, 237)
+scale = Vector2(1.193133, 1.1433567)
+texture = ExtResource("2_h2yge")
+
+[node name="PickupArea" type="Area2D" parent="Player" unique_id=1733977356]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/PickupArea" unique_id=827042334]
+position = Vector2(308, 260)
+scale = Vector2(40, 40)
+shape = SubResource("CircleShape2D_m6xoa")
+
+[node name="HeldLeaf" type="Sprite2D" parent="Player" unique_id=242045534]
+visible = false
+position = Vector2(199.969, 274.40683)
+scale = Vector2(-0.22353521, 0.3650355)
+texture = ExtResource("3_h2yge")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Player" unique_id=1971228491]
+
+[node name="LeafCountDisplay" type="Label" parent="Player/CanvasLayer" unique_id=2065205141]
+offset_left = 25.0
+offset_top = 619.0
+offset_right = 87.0
+offset_bottom = 642.0
+scale = Vector2(2.215808, 1.4839277)
+text = "leveas 0"
+
+[node name="Leaf" parent="." unique_id=477135491 instance=ExtResource("4_1bvp3")]
+position = Vector2(79, 67)
+
+[node name="Leaf2" parent="." unique_id=1514022235 instance=ExtResource("4_1bvp3")]
+position = Vector2(-242, -122)
+
+[node name="Leaf3" parent="." unique_id=927503677 instance=ExtResource("4_1bvp3")]
+position = Vector2(54, -223)
+
+[node name="Leaf4" parent="." unique_id=1585261256 instance=ExtResource("4_1bvp3")]
+position = Vector2(-178, 146)
+
+[node name="Leaf5" parent="." unique_id=1240538759 instance=ExtResource("4_1bvp3")]
+position = Vector2(-442, -283)
+
+[connection signal="area_entered" from="Player/PickupArea" to="Player" method="_on_pickup_area_area_entered"]
